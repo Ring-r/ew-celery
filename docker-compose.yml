@@ -16,9 +16,9 @@ services:
     ports:
       - 5672:5672
 
-  worker:
-    build: .
-    command: celery --app=app worker --loglevel=INFO
-    environment:
-      - BROKER_URL=amqp://guest:guest@broker//
-    image: worker
+  # worker:
+  #   build: .
+  #   command: celery -A app worker --loglevel=INFO
+  #   environment:
+  #     - BROKER_URL=amqp://guest:guest@broker//
+  #   image: worker

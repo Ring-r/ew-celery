@@ -3,9 +3,21 @@ experiments with celery
 
 [Celery - Distributed Task Queue — Celery 5.4.0 documentation](https://docs.celeryq.dev/).
 
-## run
+## create enviroment
+```shell
+python3 -m venv .venv
+source ./.venv/bin/activate
+pip install celery
+```
+
+## run dependencies
 ```shell
 docker compose up
+```
+
+## run worker
+```shell
+celery -A app worker --loglevel=INFO
 ```
 
 ## create task
