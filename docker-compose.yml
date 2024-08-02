@@ -3,12 +3,15 @@ version: '3.4'
 services:
 
   flower:
+    command: celery -A app flower --loglevel=INFO
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@broker//
-      - FLOWER_PORT=8888
-    image: mher/flower
+      # - CELERY_BROKER_URL=amqp://guest:guest@broker//
+      - BROKER_URL=amqp://guest:guest@broker//
+      - FLOWER_UNAUTHENTICATED_API=true
+    # image: mher/flower
+    image: worker
     ports:
-      - 8888:8888
+      - 5555:5555
 
   rabbitmq:
     hostname: broker
@@ -16,9 +19,9 @@ services:
     ports:
       - 5672:5672
 
-  # worker:
-  #   build: .
-  #   command: celery -A app worker --loglevel=INFO
-  #   environment:
-  #     - BROKER_URL=amqp://guest:guest@broker//
-  #   image: worker
+  worker:
+    build: .
+    command: celery -A app worker --loglevel=INFO
+    environment:
+      - BROKER_URL=amqp://guest:guest@broker//
+    image: worker

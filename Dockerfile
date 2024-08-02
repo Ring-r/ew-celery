@@ -9,6 +9,6 @@ RUN \
 COPY --chown=celery:celery . /app
 WORKDIR /app
 
-RUN pip install --no-cache-dir celery
+RUN pip install --no-cache-dir celery flower
 
 USER celery
